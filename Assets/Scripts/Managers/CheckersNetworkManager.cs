@@ -17,5 +17,14 @@ public class CheckersNetworkManager : NetworkManager
     {
         base.OnClientConnect();
         ClientConnected?.Invoke();
+
+    }
+
+    public override void OnServerAddPlayer(NetworkConnection conn)
+    {
+        PlayerNetwork player = Instantiate(playerPrefab).GetComponent<PlayerNetwork>();
+        NetworkServer.AddPlayerForConnection(conn,player.gameObject);
+        player.IsWhite = numPlayers == 1;
+        player.DisplayName = player.IsWhite ? "Light" : "Dark";
     }
 }
