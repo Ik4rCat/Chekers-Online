@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
 
     public void HostLobby()
     {
+        NetworkManager.singleton.StartHost();
         
     }
 
