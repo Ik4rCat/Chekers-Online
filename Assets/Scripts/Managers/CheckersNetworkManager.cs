@@ -28,6 +28,7 @@ public class CheckersNetworkManager : NetworkManager
         NetworkPlayers.Add(player);
         player.IsWhite = numPlayers == 1;
         player.DisplayName = player.IsWhite ? "Light" : "Dark";
+        player.LobbyOwner = player.IsWhite;
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
@@ -47,7 +48,8 @@ public class CheckersNetworkManager : NetworkManager
     public override void OnClientDisconnect()
     {
         base.OnClientDisconnect();
-
+        SceneManager.LoadScene("Lobby Scene");
+        Destroy(gameObject);
     }
 
 }

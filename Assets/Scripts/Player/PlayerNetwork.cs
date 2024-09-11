@@ -10,7 +10,11 @@ public class PlayerNetwork : Player
     [SyncVar(hook = nameof(OnDisplayNameUpdated))]
     string displayName;
 
+    [SyncVar(hook = nameof(OnLobbyOwnerUpdated))]
+    bool lobbyOwner;
+
     public static event Action ClientInfoUpdated;
+    public static event Action<bool> AuthorityLobbyOwnerStateUpdated;
 
     public string DisplayName
     {
@@ -20,6 +24,13 @@ public class PlayerNetwork : Player
         set { displayName = value; }
     }
 
+    public bool LobbyOwner
+    {
+        get { return lobbyOwner; }
+
+        [Server]
+        set { lobbyOwner = value; }
+    }
     public override void OnStartClient()
     {
         if (!isClientOnly) return;
@@ -39,6 +50,13 @@ public class PlayerNetwork : Player
     private void OnDisplayNameUpdated(string oldname, string newName)
     {
         ClientInfoUpdated?.Invoke();
+    }
+
+    private void OnLobbyOwnerUpdated(bool oldState, bool newState)
+    {
+        if (!hasAuthority) return;
+
+        AuthorityLobbyOwnerStateUpdated?.Invoke(newState);
     }
 
 }

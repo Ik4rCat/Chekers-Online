@@ -13,11 +13,13 @@ public class LobbyMenu : MonoBehaviour
     private void OnEnable()
     {
         PlayerNetwork.ClientInfoUpdated += DisplayPlayerName;
+        PlayerNetwork.AuthorityLobbyOwnerStateUpdated += ActivateBeginGameButtonAtLobbbyOwner;
     }
 
     private void OnDisable()
     {
         PlayerNetwork.ClientInfoUpdated -= DisplayPlayerName;
+        PlayerNetwork.AuthorityLobbyOwnerStateUpdated -= ActivateBeginGameButtonAtLobbbyOwner;
     }
 
     private void DisplayPlayerName()
@@ -32,11 +34,17 @@ public class LobbyMenu : MonoBehaviour
             playerNameTexts[i].text = "ждем игрока...";
 
         }
+        startGameButton.interactable = players.Count >= 2;
+    }
+
+    private void ActivateBeginGameButtonAtLobbbyOwner(bool state)
+    {
+        startGameButton.gameObject.SetActive(state);
     }
 
     public void StartGame()
     {
-        
+        NetworkManager.singleton.ServerChangeScene("Game Scene");
     }
 
 }
