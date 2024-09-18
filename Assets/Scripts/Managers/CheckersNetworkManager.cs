@@ -15,6 +15,15 @@ public class CheckersNetworkManager : NetworkManager
 
     public static event Action ClientConnected;
 
+    public override void OnStartServer()
+    { 
+        GameObject board = Instantiate(boardPrefab);
+        NetworkServer.Spawn(board);
+
+        GameObject turnsHandler = Instantiate(turnsHandlerPrefab);
+        NetworkServer.Spawn(turnsHandler);
+    }
+
     public override void OnClientConnect()
     {
         base.OnClientConnect();
@@ -50,6 +59,15 @@ public class CheckersNetworkManager : NetworkManager
         base.OnClientDisconnect();
         SceneManager.LoadScene("Lobby Scene");
         Destroy(gameObject);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        if(sceneName == "Game Scene")
+        {
+            GameObject handler =Instantiate(gameOverHandlerPrefab);
+            NetworkServer.Spawn(handler);
+        }
     }
 
 }
