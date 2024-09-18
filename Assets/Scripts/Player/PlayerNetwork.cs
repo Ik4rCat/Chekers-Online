@@ -31,6 +31,13 @@ public class PlayerNetwork : Player
         [Server]
         set { lobbyOwner = value; }
     }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+
     public override void OnStartClient()
     {
         if (!isClientOnly) return;
