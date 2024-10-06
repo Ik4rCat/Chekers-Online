@@ -66,4 +66,10 @@ public class PlayerNetwork : Player
         AuthorityLobbyOwnerStateUpdated?.Invoke(newState);
     }
 
+    [Command]
+    public void CmdNextTurn()
+    {
+        TurnsHandler.Instance.NextTurn();
+    }
+
 }
