@@ -24,6 +24,7 @@ public class BoardNetwork : Board
         MoveOnBoard(BoardList, oldPosition, newPosition);
         RpcMoveOnBoard(oldPosition, newPosition, nextTurn);
     }
+
     [ClientRpc]
     private void RpcMoveOnBoard(Vector2Int oldPosition, Vector2Int newPosition, bool nextTurn)
     {
