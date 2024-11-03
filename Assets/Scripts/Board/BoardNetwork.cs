@@ -13,6 +13,8 @@ public class BoardNetwork : Board
 
     public override IList<int[]> BoardList => boardList;
 
+    public override event Action<Vector3> OnPieceCaptured;
+
     public override void OnStartServer()
     {
         FillBoardList(boardList);
@@ -35,5 +37,21 @@ public class BoardNetwork : Board
             NetworkClient.connection.identity.GetComponent<PlayerNetwork>().CmdNextTurn();
         }
     }
+
+    [Server]
+    public override void CaptureOnBoard(Vector2Int piecePosition)
+    {
+        Capture(BoardList, piecePosition);
+        RpcCaptureOnBoard(piecePosition);
+
+        OnPieceCaptured?.Invoke(new Vector3(piecePosition.x,0,piecePosition.y));
+    }
+
+    [ClientRpc]
+    private void RpcCaptureOnBoard(Vector2Int piecePosition)
+    {
+        Capture(boardList,piecePosition);
+    } 
+
 
 }

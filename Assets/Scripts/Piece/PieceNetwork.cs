@@ -11,11 +11,25 @@ public class PieceNetwork : NetworkBehaviour
     public override void OnStartServer()
     {
         owner = connectionToClient.identity.GetComponent<PlayerPiecesHandler>();
+        Board.Instance.OnPieceCaptured += DestroySelfOnCaptured;
     }
+
+    public override void OnStopServer()
+    {
+        Board.Instance.OnPieceCaptured -= DestroySelfOnCaptured;
+    }
+
 
     private void SynchookSelfSetParent(PlayerPiecesHandler oldOwner, PlayerPiecesHandler newOwner )
     {
         transform.parent = newOwner.PiecesParent;
+    }
+
+    private void DestroySelfOnCaptured(Vector3 capturedPiecePos)
+    {
+        if (capturedPiecePos != transform.position) return;
+
+        NetworkServer.Destroy(gameObject);
     }
 
 }
