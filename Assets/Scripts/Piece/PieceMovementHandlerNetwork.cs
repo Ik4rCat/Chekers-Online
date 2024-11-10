@@ -39,4 +39,10 @@ public class PieceMovementHandlerNetwork : PieceMovementHandler
         base.Capture(piecePosition);
     }
 
+    protected override void PlayAudio()
+    {
+        if (!hasAuthority) return;
+        base.PlayAudio();
+    }
+
 }
