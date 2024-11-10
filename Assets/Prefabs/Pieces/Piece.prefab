@@ -247,18 +247,7 @@ MonoBehaviour:
   audioSource: {fileID: 6012433781486249098}
   clips:
   - {fileID: 8300000, guid: b821f2f01af50e448ba2b434599d7277, type: 3}
-  - {fileID: 8300000, guid: 687f5f1aa5fab164dbe7ef3471298930, type: 3}
-  - {fileID: 8300000, guid: b02a21d8555c9374fa0763db5dea6031, type: 3}
-  - {fileID: 8300000, guid: bf17c74e923583247a586c927c5cba86, type: 3}
-  - {fileID: 8300000, guid: e7b228d827aaeaa489406457e689f479, type: 3}
-  - {fileID: 8300000, guid: bdde6ae42d4ae2643b2475958aa68b5f, type: 3}
-  - {fileID: 8300000, guid: 43f5de429a853bf47a6e651c587cf8d3, type: 3}
-  - {fileID: 8300000, guid: b6db156972a228344a2e71bfe9ae5580, type: 3}
-  - {fileID: 8300000, guid: a4d36847306bee7438fe2f710bc17f8e, type: 3}
   - {fileID: 8300000, guid: 024aefd9eeb38c147aaac4acc89e3f07, type: 3}
-  - {fileID: 8300000, guid: cfff8aab88ffea14a831878fbc44394f, type: 3}
-  - {fileID: 8300000, guid: b736251e41e4b2b489a524cfc71cf199, type: 3}
-  - {fileID: 8300000, guid: f367b9abd48c0854d8ad9ef487d31e80, type: 3}
   volume: 0.2
 --- !u!82 &6012433781486249098
 AudioSource:

@@ -41,7 +41,12 @@ public class PieceMovementHandlerNetwork : PieceMovementHandler
 
     protected override void PlayAudio()
     {
-        if (!hasAuthority) return;
+        RPCPlayAudio();
+    }
+
+    [ClientRpc]
+    private void RPCPlayAudio()
+    {
         base.PlayAudio();
     }
 
