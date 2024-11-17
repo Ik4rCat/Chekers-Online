@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PieceMovementHandlerNetwork : PieceMovementHandler
 {
+
+    public static event Func<PiecePromotionHandler, int, int, bool> ServerPieceReachedBackline;
+
     public override void OnStartAuthority()
     {
         TilesSelectionHandler.OnTileSelected += HandleTileSelected;
@@ -48,6 +51,12 @@ public class PieceMovementHandlerNetwork : PieceMovementHandler
     private void RPCPlayAudio()
     {
         base.PlayAudio();
+    }
+
+    protected override void ReachedBackline(Vector2Int newPosition)
+    {
+        ServerPieceReachedBackline.Invoke(promotionHandler, newPosition.x, newPosition.y);
+
     }
 
 }

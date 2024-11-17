@@ -31,6 +31,7 @@ public class Board : NetworkBehaviour
             lst.Add(new int[] { 0, 0, 0, 0, 0, 0, 0, 0 });
     }
 
+    
     protected void PromotePieceOnBoard(IList<int[]> lst, int x, int z)
     {
         lst[x][z] += (int)PieceType.King - (int)PieceType.Man;
