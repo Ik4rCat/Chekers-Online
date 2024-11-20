@@ -6,5 +6,27 @@ using System;
 
 public class GameOverHandlerNetworked : GameOverHandler
 {
-    
+    public override void OnStartServer()
+    {
+        TurnsHandler.Instance.OnGameOver += HandleGameOver;
+
+    }
+
+    public override void OnStopServer()
+    {
+        TurnsHandler.Instance.OnGameOver -= HandleGameOver;
+    }
+
+    [Server]
+    private void HandleGameOver(string reslt)
+    {
+        RPCGameOver(reslt);
+    }
+
+    [ClientRpc]
+    private void RPCGameOver(string result)
+    {
+        CallGameOver(result);
+    }
+
 }
