@@ -14,7 +14,16 @@ public class ButtonSurrender : MonoBehaviour
         }
         else
         {
-            
+            List<PlayerNetwork> players = ((CheckersNetworkManager)NetworkManager.singleton).NetworkPlayers;
+
+            for (int i = 0; i < players.Count; i++)
+            {
+               if( players[i].hasAuthority == true)
+                {
+                    players[i].CMDSurrender($"Победитель: {players[i == 0 ? 1 : 0].DisplayName}");
+                }
+
+            }
         }
     }
 }

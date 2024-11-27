@@ -9,7 +9,6 @@ public class GameOverHandlerNetworked : GameOverHandler
     public override void OnStartServer()
     {
         TurnsHandler.Instance.OnGameOver += HandleGameOver;
-
     }
 
     public override void OnStopServer()

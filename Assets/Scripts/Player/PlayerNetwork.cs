@@ -72,4 +72,10 @@ public class PlayerNetwork : Player
         TurnsHandler.Instance.NextTurn();
     }
 
+    [Command]
+    public void CMDSurrender(string message)
+    {
+        TurnsHandler.Instance.Surrender(message);
+    }
+
 }
