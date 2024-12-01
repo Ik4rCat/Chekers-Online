@@ -68,5 +68,11 @@ public class PieceMovementHandler : NetworkBehaviour
         audioHandler.PlayMoveSound();
     }
 
+    protected void LockSelectPiece()
+    {
+        OnLockSelectedPiece?.Invoke(true);
+        OnPieceMoved?.Invoke(true);
+    }
+
     protected virtual void ReachedBackline(Vector2Int newPosition) { }
 }

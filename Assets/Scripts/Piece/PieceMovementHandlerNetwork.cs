@@ -12,11 +12,13 @@ public class PieceMovementHandlerNetwork : PieceMovementHandler
     public override void OnStartAuthority()
     {
         TilesSelectionHandler.OnTileSelected += HandleTileSelected;
+        TurnsHandler.Instance.OnGameOver += RPCGameOver;
     }
 
     public override void OnStopAuthority()
     {
         TilesSelectionHandler.OnTileSelected -= HandleTileSelected;
+        TurnsHandler.Instance.OnGameOver -= RPCGameOver;
     }
 
     protected override void Move(Vector3 position, bool nextTurn)
@@ -57,6 +59,12 @@ public class PieceMovementHandlerNetwork : PieceMovementHandler
     {
         ServerPieceReachedBackline.Invoke(promotionHandler, newPosition.x, newPosition.y);
 
+    }
+
+    [ClientRpc]
+    private void RPCGameOver(string result)
+    {
+        LockSelectPiece();
     }
 
 }

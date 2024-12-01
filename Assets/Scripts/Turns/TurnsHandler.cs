@@ -15,7 +15,7 @@ public class TurnsHandler : NetworkBehaviour
     protected List<Player> Players { get; set; } = new List<Player>();
     protected PlayerPiecesHandler piecesHandler = null;
 
-    public event Action<string> OnGameOver;
+    public event Action<string> OnGameOver; // :(
     public event Action OnMovesGenerated;
 
     #region Singleton
