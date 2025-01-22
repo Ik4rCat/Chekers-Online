@@ -27,6 +27,8 @@ public class ButtonOffline : MonoBehaviour
                 NetworkManager.singleton.StopClient();
 
             Destroy(NetworkManager.singleton.gameObject);
+            //Destroy(FindObjectOfType<SteamManager>().gameObject);
+
         }
     }
 }

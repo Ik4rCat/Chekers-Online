@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManagerSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject localGameManagerPrefab, networkManagerPrefab;
+    [SerializeField] GameObject localGameManagerPrefab, networkManagerPrefab, steamManagerPrefab;
 
     public void SpawnLocalGameManager()
     {
@@ -14,5 +14,9 @@ public class ManagerSpawner : MonoBehaviour
     public void SpawnNetworkManager()
     {
         Instantiate(networkManagerPrefab);
+        //if(MainMenu.UseSteam)
+        //    Instantiate(steamManagerPrefab);
+        
     }
+    
 }

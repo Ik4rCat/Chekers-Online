@@ -13,6 +13,8 @@ public class PlayerNetwork : Player
     [SyncVar(hook = nameof(OnLobbyOwnerUpdated))]
     bool lobbyOwner;
 
+    [SyncVar] ulong steamID; 
+
     public static event Action ClientInfoUpdated;
     public static event Action<bool> AuthorityLobbyOwnerStateUpdated;
 
@@ -30,6 +32,19 @@ public class PlayerNetwork : Player
 
         [Server]
         set { lobbyOwner = value; }
+    }
+
+    public ulong SteamID
+    {
+        get { return steamID; }
+
+        [Server]
+        set 
+        { 
+            steamID = value;
+            CSteamID cSteamID = new CSteamID(steamID);
+            DisplayName = SteamFriends.GetFriendPersonaName(cSteamID);
+        }
     }
 
     private void Start()

@@ -40,7 +40,16 @@ public class CheckersNetworkManager : NetworkManager
         NetworkPlayers.Add(player);
         Players.Add(player);
         player.IsWhite = numPlayers == 1;
-        player.DisplayName = player.IsWhite ? "Light" : "Dark";
+        if (MainMenu.UseSteam)
+        {
+            CSteamID steamID = SteamMatchmaking.GetLobbyMemberByIndex(MainMenu.LobbyID, numPlayers - 1);
+            player.SteamID = steamID.m_SteamID;
+        }
+        else
+        {
+            player.DisplayName = player.IsWhite ? "Light" : "Dark";
+        }
+
         player.LobbyOwner = player.IsWhite;
     }
 
@@ -58,13 +67,21 @@ public class CheckersNetworkManager : NetworkManager
     {
         NetworkPlayers.Clear();
         Players.Clear();
+        if (MainMenu.UseSteam)
+            SteamMatchmaking.LeaveLobby(MainMenu.LobbyID);
     }
 
     public override void OnClientDisconnect()
     {
         base.OnClientDisconnect();
-        SceneManager.LoadScene("Lobby Scene");
-        Destroy(gameObject);
+
+        if(NetworkPlayers.Count == 0)
+        {
+            SceneManager.LoadScene("Lobby Scene");
+            Destroy(gameObject);
+        }
+        if (MainMenu.UseSteam)
+            SteamMatchmaking.LeaveLobby(MainMenu.LobbyID); 
     }
 
     public override void OnServerSceneChanged(string sceneName)
