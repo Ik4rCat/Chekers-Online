@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
     public static bool UseSteam { get; private set; } = true;
     public static CSteamID LobbyID {  get; private set; }
 
-
+    
     private void OnEnable()
     {
         if(!UseSteam) return;
@@ -68,6 +68,7 @@ public class MainMenu : MonoBehaviour
     private void OnLobbyEntered(LobbyEnter_t callback)
     {
         if (NetworkServer.active) return;
+
 
         LobbyID = new CSteamID(callback.m_ulSteamIDLobby);
         string hostAddress = SteamMatchmaking.GetLobbyData(LobbyID, "HostAddress");
